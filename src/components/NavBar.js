@@ -1,9 +1,22 @@
 import React from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import logo from "../images/logo.png";
-function NavBar({ search }) {
+import { useDispatch } from "react-redux";
+import { getAllMovies, getMovieSearch } from "../redux/actions/movieAction";
+function NavBar() {
+
   const onSearch = (value) => {
     search(value);
+  };
+
+  const dispatch = useDispatch();
+
+  const search = async (word) => {
+    if(word === ""){
+      dispatch(getAllMovies());
+    }else{
+      dispatch(getMovieSearch(word));
+    }
   };
 
   return (
